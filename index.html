@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080808">
+  <title>AJ BET | Play Zone</title>
+  <style>
+    :root { --gold:#f6bd27; --gold2:#ffe28a; --bg:#080808; --panel:#151515; --muted:#b7b7b7; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:Arial,Helvetica,sans-serif; color:#f8f8f8; background:radial-gradient(circle at top,#29200a 0,#101010 38%,#070707 78%); }
+    header { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px clamp(16px,4vw,48px); border-bottom:1px solid #40310d; position:sticky; top:0; background:#090909ed; backdrop-filter:blur(12px); z-index:2; }
+    .brand { display:flex; align-items:center; gap:10px; font-weight:900; letter-spacing:1px; color:var(--gold); }
+    .brand img { width:46px; height:46px; object-fit:cover; border-radius:50%; border:1px solid #bd8b16; }
+    nav { display:flex; gap:16px; flex-wrap:wrap; } nav a { color:#eee; text-decoration:none; font-size:14px; }
+    .wrap { width:min(1100px,92%); margin:auto; }
+    .hero { padding:48px 0 28px; display:grid; grid-template-columns:1.1fr .9fr; gap:24px; align-items:center; }
+    .eyebrow { color:var(--gold); text-transform:uppercase; letter-spacing:3px; font-size:12px; font-weight:bold; }
+    h1 { font-size:clamp(36px,6vw,64px); line-height:1.02; margin:12px 0; }
+    h1 span { color:var(--gold); }
+    p { color:var(--muted); line-height:1.65; }
+    .buttons { display:flex; gap:12px; flex-wrap:wrap; margin-top:24px; }
+    button, .btn { border:0; cursor:pointer; padding:12px 17px; border-radius:10px; font-weight:800; text-decoration:none; display:inline-block; }
+    .primary { background:linear-gradient(135deg,var(--gold2),var(--gold)); color:#171000; }
+    .secondary { border:1px solid #6b5317; background:#17130a; color:var(--gold2); }
+    .logo-card { background:#0a0a0a; border:1px solid #4b3910; border-radius:22px; padding:12px; box-shadow:0 20px 70px #0009; }
+    .logo-card img { width:100%; max-height:390px; object-fit:contain; display:block; border-radius:14px; }
+    section { padding:26px 0; }
+    .section-title { display:flex; justify-content:space-between; align-items:end; gap:12px; flex-wrap:wrap; }
+    h2 { margin:0 0 8px; font-size:28px; }
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:18px; }
+    .card { background:linear-gradient(145deg,#1a1a1a,#101010); border:1px solid #34302a; padding:20px; border-radius:16px; }
+    .icon { font-size:30px; }
+    .card h3 { margin:12px 0 6px; }
+    .card p { font-size:14px; margin-bottom:0; }
+    .pill { display:inline-block; border:1px solid #5b4716; color:var(--gold2); background:#211a09; border-radius:999px; padding:5px 9px; font-size:11px; font-weight:bold; }
+    .scorebox { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:12px; background:#0b0b0b; border-radius:10px; padding:12px; }
+    .score { color:var(--gold); font-size:22px; font-weight:900; }
+    .notice { border-left:3px solid var(--gold); padding:12px 15px; background:#17130a; border-radius:0 10px 10px 0; color:#ddd; font-size:13px; }
+    footer { border-top:1px solid #30260e; padding:24px 0 36px; margin-top:28px; color:#9a9a9a; font-size:12px; }
+    @media(max-width:760px) { .hero { grid-template-columns:1fr; padding-top:30px; } .logo-card { max-width:460px; margin:auto; } .grid { grid-template-columns:1fr; } nav { gap:10px; } header { align-items:flex-start; } }
+  </style>
+</head>
+<body>
+<header>
+  <div class="brand"><img src="assets/aj-bet-logo.jpg" alt="AJ BET logo"><span>AJ BET</span></div>
+  <nav><a href="#games">Games</a><a href="#coins">Coins</a><a href="#leaderboard">Leaderboard</a></nav>
+</header>
+<main class="wrap">
+  <div class="hero">
+    <div>
+      <div class="eyebrow">Welcome to the play zone</div>
+      <h1>Play smart.<br><span>Have fun.</span></h1>
+      <p>Welcome to AJ BET, a demo gaming hub. Try the mini-games, collect virtual coins, and build your score. Coins on this demo have no cash value.</p>
+      <div class="buttons"><a class="btn primary" href="#games">Explore games</a><button class="secondary" id="dailyBtn">Collect daily coins</button></div>
+      <div class="scorebox"><div><small>YOUR VIRTUAL COINS</small><div class="score" id="coins">100</div></div><div><small>YOUR SCORE</small><div class="score" id="score">0</div></div></div>
+    </div>
+    <div class="logo-card"><img src="assets/aj-bet-logo.jpg" alt="AJ BET black and gold logo"></div>
+  </div>
+  <section id="games">
+    <div class="section-title"><div><div class="eyebrow">Choose your challenge</div><h2>Mini Games</h2></div><span class="pill">DEMO • VIRTUAL COINS ONLY</span></div>
+    <div class="grid">
+      <article class="card"><div class="icon">🎯</div><h3>Lucky Number</h3><p>Guess a number from 1 to 5. This is a free demo game with no cash prizes.</p><div class="buttons"><button class="primary" onclick="playNumber()">Play now</button></div><p id="numberResult" aria-live="polite"></p></article>
+      <article class="card"><div class="icon">🪙</div><h3>Coin Tap</h3><p>Tap to earn virtual coins and increase your score.</p><div class="buttons"><button class="primary" onclick="tapCoin()">Tap for coins</button></div><p id="coinResult" aria-live="polite"></p></article>
+      <article class="card"><div class="icon">🧠</div><h3>Quick Quiz</h3><p>Answer a simple question to earn virtual points.</p><div class="buttons"><button class="primary" onclick="quiz()">Start quiz</button></div><p id="quizResult" aria-live="polite"></p></article>
+    </div>
+  </section>
+  <section id="coins">
+    <div class="section-title"><div><div class="eyebrow">Demo wallet</div><h2>Virtual Coins</h2></div></div>
+    <div class="card"><p>Your coins are stored in this browser on this device. This prototype does not accept deposits, process withdrawals, or award real money.</p><div class="notice">For a public website with real-money payments or prizes, get qualified legal advice and any required licenses before enabling those features.</div></div>
+  </section>
+  <section id="leaderboard">
+    <div class="section-title"><div><div class="eyebrow">Keep playing</div><h2>Leaderboard</h2></div></div>
+    <div class="card"><div class="scorebox"><span>🥇 You — Demo player</span><strong id="leaderScore">0 points</strong></div><p>Local demo leaderboard only; scores are not shared with other players.</p></div>
+  </section>
+</main>
+<footer><div class="wrap">© <span id="year"></span> AJ BET • Demo gaming website • Virtual coins only</div></footer>
+<script>
+  let coins = Number(localStorage.getItem('ajbet_coins') || 100);
+  let score = Number(localStorage.getItem('ajbet_score') || 0);
+  let dailyCollected = localStorage.getItem('ajbet_daily') === new Date().toDateString();
+  function render() {
+    document.getElementById('coins').textContent = coins;
+    document.getElementById('score').textContent = score;
+    document.getElementById('leaderScore').textContent = score + ' points';
+    localStorage.setItem('ajbet_coins', coins);
+    localStorage.setItem('ajbet_score', score);
+  }
+  document.getElementById('dailyBtn').addEventListener('click', () => {
+    if (dailyCollected) { alert('Daily virtual coins already collected today.'); return; }
+    coins += 25; dailyCollected = true; localStorage.setItem('ajbet_daily', new Date().toDateString());
+    render(); alert('You collected 25 virtual coins!');
+  });
+  function playNumber() {
+    const raw = prompt('Guess a number from 1 to 5:');
+    if (raw === null) return;
+    const guess = Number(raw), answer = Math.floor(Math.random()*5)+1;
+    const out = document.getElementById('numberResult');
+    if (!Number.isInteger(guess) || guess < 1 || guess > 5) { out.textContent = 'Please enter a whole number from 1 to 5.'; return; }
+    if (guess === answer) { coins += 10; score += 10; out.textContent = 'Correct! +10 virtual coins. Number: ' + answer; }
+    else { score += 1; out.textContent = 'Not this time. Number: ' + answer + '. +1 point for trying.'; }
+    render();
+  }
+  function tapCoin() { coins += 1; score += 1; document.getElementById('coinResult').textContent = '+1 virtual coin and +1 point!'; render(); }
+  function quiz() {
+    const answer = prompt('What is 2 + 3?');
+    const out = document.getElementById('quizResult');
+    if (answer === null) return;
+    if (answer.trim() === '5') { coins += 5; score += 5; out.textContent = 'Correct! +5 virtual coins.'; }
+    else { out.textContent = 'Not quite. The answer is 5. Try again!'; }
+    render();
+  }
+  document.getElementById('year').textContent = new Date().getFullYear();
+  render();
+</script>
+</body>
+</html>
